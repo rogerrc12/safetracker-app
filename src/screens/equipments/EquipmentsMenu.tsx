@@ -1,29 +1,21 @@
-import Card from "@src/components/common/UI/Card";
 import Screen from "@src/components/common/utils/Screen";
-import { Text, useTheme } from "native-base";
-import { Pressable, View } from "react-native";
+import { useTheme } from "native-base";
 import { EquipmentsMenuProps } from "./EquipmentsMenu.types";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { RootScreenNames } from "@src/navigation/root/Root.screen-names";
+import MenuItem from "@src/components/common/UI/menuItem/MenuItem";
+import { EquipmentsScreenNames } from "@src/navigation/equipments/Equipments.screen-names";
 
 function EquipmentsMenu({ navigation }: EquipmentsMenuProps) {
   const { colors } = useTheme();
 
   return (
     <Screen>
-      <Card>
-        <Pressable onPress={() => navigation.navigate(RootScreenNames.EXTINGUISHERS)}>
-          <View style={{ alignItems: "center" }}>
-            <FontAwesome5 name="fire-extinguisher" size={45} color={colors.primary} />
-            <Text mt="2" color="black" fontSize="2xl" fontWeight={600}>
-              Extintores
-            </Text>
-            <Text fontWeight={600} color="gray.400">
-              Administración de extintores
-            </Text>
-          </View>
-        </Pressable>
-      </Card>
+      <MenuItem
+        icon="fire-extinguisher"
+        iconColor={colors.primary[500]}
+        label="Extintores"
+        onSelect={() => navigation.navigate(EquipmentsScreenNames.EXTINGUISHERS)}
+        description="Administrar extintores"
+      />
     </Screen>
   );
 }

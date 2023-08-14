@@ -4,7 +4,7 @@ import { RhfInputProps } from "./Input.interfaces";
 import { styles } from "./Input.styles";
 import { View } from "react-native";
 
-function Input<T extends FieldValues>({ name, label, placeholder, control, containerStyles, ...rest }: RhfInputProps<T>) {
+function Input<T extends FieldValues>({ name, label, placeholder, control, containerStyles, disabled, ...rest }: RhfInputProps<T>) {
   const { field } = useController<T>({
     name,
     control,
@@ -20,6 +20,7 @@ function Input<T extends FieldValues>({ name, label, placeholder, control, conta
         onChangeText={field.onChange}
         onBlur={field.onBlur}
         value={field.value}
+        isDisabled={disabled}
         {...rest}
       />
     </View>

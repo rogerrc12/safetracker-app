@@ -4,7 +4,7 @@ import { AuthScreenNames } from "@src/navigation/auth/AuthScreen.names";
 import { FieldValues } from "react-hook-form";
 
 export interface ILoginFormValues extends FieldValues {
-  email: string;
+  username: string;
   password: string;
 }
 

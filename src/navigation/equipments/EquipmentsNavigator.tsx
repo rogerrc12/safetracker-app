@@ -1,20 +1,30 @@
 import { createStackNavigator } from "@react-navigation/stack";
-
-import { EquipmentsNavigatorParams } from "./Equipments.params";
-import { EquipmentsScreenNames } from "./EquipmentsScreen.names";
-
-// SCREENS
 import EquipmentsMenu from "@src/screens/equipments/EquipmentsMenu";
-import Extinguishers from "@src/screens/extinguishers/Extinguishers";
+import { EquipmentsParamsList } from "./Equipments.params";
+import { EquipmentsScreenNames } from "./Equipments.screen-names";
+import Extinguishers from "@src/screens/equipments/extinguishers/Extinguishers";
+import GeneralAspects from "@src/screens/equipments/extinguishers/add-extinguisher/GeneralAspects";
+import TechnicalAspects from "@src/screens/equipments/extinguishers/add-extinguisher/TechnicalAspects";
+import DrawerHeader from "@src/components/navigation/DrawerHeader";
+import KeyDates from "@src/screens/equipments/extinguishers/add-extinguisher/KeyDates";
+import TitleHeader from "@src/components/navigation/TitleHeader";
+import HeaderBackButton from "@src/components/navigation/HeaderBackButton";
 
-const Stacks = createStackNavigator<EquipmentsNavigatorParams>();
+const Stack = createStackNavigator<EquipmentsParamsList>();
 
 function EquipmentsNavigator() {
   return (
-    <Stacks.Navigator initialRouteName={EquipmentsScreenNames.EQUIPMENTS_MENU}>
-      <Stacks.Screen name={EquipmentsScreenNames.EQUIPMENTS_MENU} options={{ headerShown: false }} component={EquipmentsMenu} />
-      <Stacks.Screen name={EquipmentsScreenNames.EXTINGUISHERS} component={Extinguishers} />
-    </Stacks.Navigator>
+    <Stack.Navigator
+      screenOptions={{ headerTitle: () => <TitleHeader title="Agregar extintor" />, headerLeft: () => <HeaderBackButton /> }}
+    >
+      <Stack.Screen name={EquipmentsScreenNames.EQUIPMENTS} options={{ header: () => <DrawerHeader /> }} component={EquipmentsMenu} />
+      <Stack.Screen name={EquipmentsScreenNames.EXTINGUISHERS} component={Extinguishers} />
+      <Stack.Group navigationKey="AddExtinguisher">
+        <Stack.Screen name={EquipmentsScreenNames.ADD_EXTINGUISHER_GENERAL_ASPECTS} component={GeneralAspects} />
+        <Stack.Screen name={EquipmentsScreenNames.ADD_EXTINGUISHER_TECH_ASPECTS} component={TechnicalAspects} />
+        <Stack.Screen name={EquipmentsScreenNames.ADD_EXTINGUISHER_KEY_DATES} component={KeyDates} />
+      </Stack.Group>
+    </Stack.Navigator>
   );
 }
 
